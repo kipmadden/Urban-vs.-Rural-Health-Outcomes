@@ -7,67 +7,101 @@ Our hypothesis is:
 ## Urban counties have a better health outcome than rural counties in Texas.
 
 
-The first two questions that immediately follow are:
-* How do you define Urban and Rural?
-* What measure do you use for a Health Outcome?
+# Project Description/Outline
+We merged county health data and demographic data for Texas for 2019 with two classifications of Urban and Rural. Then we  settled on a dependent health outcome measure and determined if there is a statistical difference between the Urban and Rural counties. Next we found correlated factors that have an impact on health outcomes compared by counties. Finally we summarized the top and bottom 5 counties for health outcome.
 
+# Breakdown of Tasks
 
-# Urban vs Rural
-
-### How do you define Urban and Rural?
-
-We used the Texas Health Professions Resource Center (HPRC) ![Definitions of County Designations](https://dshs.texas.gov/chs/hprc/counties.shtm) to imported an excel file
-![Urban Rural Excel File](data/county_status.xlsx)
+## Acquired datasets: 
+#### Urban vs Rural - How did we define Urban and Rural?
+We used the Texas Health Professions Resource Center (HPRC) [Definitions of County Designations](https://dshs.texas.gov/chs/hprc/counties.shtm) to imported an excel file. 
+[Urban Rural Excel File](data/county_status.xlsx)
 
 After reading more on the subject we found a system to classify Urban and Rural into six subcategories
-at the ![CDC NCHS Urban Rural Classification System](https://www.cdc.gov/nchs/data_access/urban_rural.htm#Data_Files_and_Documentation)
+at the [CDC NCHS Urban Rural Classification System](https://www.cdc.gov/nchs/data_access/urban_rural.htm#Data_Files_and_Documentation)
 The deeper classification splits up urban into four groups making a distinction between inner-city large population counties and suburb large population counties. You can see the clusters on a map from their website.
-![US Map of URCS](URCS_usaMap.png)
+![US Map of URCS](Images/URCS_usaMap.png)
 
-# What measure do we use for 'Health Outcome'?
+## Cleaning of Datasets: 
+Excel files will be merges in both an [Excel Workbook](output/2019_County_Health_Texas_Data_Kip.xlsx) and in a [Jupyter notebook](output/Urban_Rural_Health_Texas.ipynb)
 
-We used the ![County Health rankings Texas 2019 dataset](https://www.countyhealthrankings.org/app/texas/2019/downloads) and chose Age-Adjusted Mortality rate (deaths <75yrs of age / 100k population (age-adjusted)
+## Merging Datasets: 
+The data will be merged on FIPS (CDC unique county code) into a [multiindex dataframe](output/multi_df.csv)
 
-# Research questions to answer
+## Analysis of Data: 
+Data was correlated, plotted and then statistically analyzed and then regression fitted
+![Here is our analysis method](Images/analysis_path.jpg)
 
-* Do urban counties have a better age-adjusted mortality rate (AAMR) than rural counties?
-* What factors correlate with AAMR?
-*   health behavior
-*   clinical care 
-*   social and economic 
-*   physical environment 
-* What are the five top and bottom counties measured by AAMR?
+## Presentation: 
+We summarized our findings in a [Powerpoint presentation](output/Urban_Rural_Health_Texas.pptx)
+# Research questions answered
 
+## Do urban counties have a better age-adjusted mortality rate (AAMR) than rural counties?
 
+Yes! We can reject our null-hypothesis and find there is better outcome for Urban counties in Texas
+![rejectNull](Images/rejectNull.jpg)
 
-
-which county you live in has no impact on your health outcome. Next we will explore the factors that influence the differences between urban and rural counties in Texas. Finally we will give a ranking of the statistically top 5 and bottom 5 counties regarding health outcomes (as measured by the Age-Adjusted Mortality Rate).
-
-
-Project Description/Outline
-We will merge health and demographic data to find correlated factors that have an impact on health outcomes compared by counties. 
-Rough Breakdown of Tasks
-Acquire datasets: APIs, csv, xlsx and potentially database queries will be used to obtain datasets. Shane Livingston
-Cleaning of Datasets: Data will be cleaned for incomplete rows, incorrect datatypes, and outliers. Kip Madden
-Merging Datasets: Some Datasets will be merged into a single set.
-Analysis of Data: Data will be statistically analyzed, plotted and correlated. Hopefully we will find significant trends to report on.
-Presentation: We will present NO more than 10 minutes on our findings and create Jupyter notebooks with tables and figures.
+If we examine by counties by the URCS system we find a difference for large population counties and all smaller counties in a clear trend decreasing health outcome the further distance from an inner-city metropolitan area.
+![URCSresult](Images/URCSreject.jpg)
 
 
-## File & Directory Structure
+## What factors correlate with AAMR?
 
-* Urban_Rural_Health_Texas.ipynb : Data wrangling and analysis notebook
-* [Urban_Rural_Health_Texas.pptx](output/Urban_Rural_Health_Texas.pptx)  : Presentation power point slides 
+###     health behavior factors
+The following parameter all correlate statistically:
+*  % Physically Inactive
+*  % Diabetic
+*  % Smokers
+An example scatterplot is shown:
 
-* data/       Excel & csv files for data importing
-* Resources/  NCHS Urban Rural classfication scheme
-* output/     Correlation matrix and dataframe exports
+![Inactive](Images/physicallyInactive.jpg)
 
-We will seek to reject the null hypothesis:
 
-#### There is no difference to health outcome as measured by Age-Adjusted Mortality Rate (Deaths of under age 75 per 100,000 population (age-adjusted) ) between urban and rural county residents in Texas.
+*     clinical care 
+The following parameter all correlate statistically:
+% Diabetic
 
-# Do urban counties have better health outcomes in Texas?
 
-Using the [Count Health rankings](https://www.countyhealthrankings.org/app/texas/2019/downloads) Texas 2019 dataset and the [CDC NCHS Urban Rural Classification System](https://www.cdc.gov/nchs/data_access/urban_rural.htm#Data_Files_and_Documentation) we will seek to reject the null hypothesis that which county you live in has no impact on your health outcome. Next we will explore the factors that influence the differences between urban and rural counties in Texas. Finally we will give a ranking of the statistically top 5 and bottom 5 counties regarding health outcomes (as measured by the Age-Adjusted Mortality Rate).
 
+*     social and economic 
+This category showed the strongest correlation that we examined:
+% Child Poverty
+% Teen Pregnancy
+![TeenPreg](Images/corrFactors.jpg)
+
+### Household Income
+![HouseholdInc](Images/HouseInc.jpg)
+
+
+#### The conclusion is that Household income correlates with Age-Adjusted Mortality Rate. But what appears to be the case is that as you move out of the city people make less than a certain amount of money on average. Making more money is what seems to be what is improving health outcomes, and rural counties don't have an average income high enough so their outcome is worse.
+
+# Summary of Factors that correlated
+![summaryFactors](Images/summaryFactors.jpg)
+
+# What are the five top and bottom counties measured by AAMR?
+![topbottom](Images/topBottom.jpg)
+
+# File & Directory Structure
+
+## root
+* [Urban_Rural_Health_Texas.ipynb](output/Urban_Rural_Health_Texas.ipynb) : Final Jupyter notebook
+
+## data (input) - Excel & csv files for data importing
+* [NCHS Urban Rural Classification System](data/NCHS_Urban_Rural_Classification_System.xlsx) : URCS mapping file six category Urban / Rural classification system
+* [Urban Rural county_status mapping file](data/county_status.xlsx) : Simple two category Urban / Rural mapping file
+* [2019 County Health Rankings Texas Data - v1_0](data/2019CountyHealthRankingsTexasData-v1_0.xls) : Primary source of health outcome and independent variable excel multiindex file
+
+## group - Intermediate files from group members
+* [Cenez example file](group/Cenez2.ipynb) : Data wrangling and analysis notebook
+* [Todd example file](group/Toshwork.ipynb) : Data wrangling and analysis notebook
+* [Kip example file](group/Kip2.ipynb) : Data wrangling and analysis notebook
+* [Shane example file](group/Shane1.ipynb) : Data wrangling and analysis notebook
+
+## output - Correlation matrix, dataframe exports and Powerpoint
+* [Presentation Powerpoint Slide](output/Urban_Rural_Health_Texas.pptx)  : Presentation power point slides 
+* [Correlation matrix Excel file](output/corr1.xlsx) : Correlation Matrix used to filter top 20 parameters to plot
+* [Excel 4D Plots and vlooksups](output/2019_County_Health_Texas_Data_Kip.xlsx)  : Exploratory Excel Workbook
+* [Multiindex dataframe CSV example](output/multi_df.csv) : Example multiindex dataframe
+
+## resources
+* [NCHS Urban Rural classfication scheme](Resources/NCHS_Urban-Rural_Classification_Scheme_for_Counties.pdf) : Useful guide to URCS system
