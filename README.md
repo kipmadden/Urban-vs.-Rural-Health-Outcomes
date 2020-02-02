@@ -81,6 +81,12 @@ This category showed the strongest correlation that we examined:
 # What are the five top and bottom counties measured by AAMR?
 ![topbottom](Images/topBottom.jpg)
 
+# Conclusion
+
+Urban counties fare better than Rural counties. After looking at hundreds of correlations in Excel and Pandas and narrowing them down to plot and regress them, it appears as though Income is what accounts for most of the difference. We split the outcomes by race - White, Black and Hispanic to further see if we could examine this link. What we found was overall Income correlated for Whites and Blacks because they both achieved the higher average income in more populous areas. For Hispanics we didn't see this correlation, but that is probably because they don't earn enough. Other factors we examined like Teen Pregnancy when a high % of the population track with the lower health outcomes. 
+Health beahviors such as % Smokers and % Inactive also saw worse outcomes the hight those percentages were in the county - this is no surprise.
+
+
 # File & Directory Structure
 
 ## root
