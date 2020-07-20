@@ -23,7 +23,7 @@ The deeper classification splits up urban into four groups making a distinction 
 ![US Map of URCS](Images/URCS_usaMap.png)
 
 ## Cleaning of Datasets: 
-Excel files will be merges in both an [Excel Workbook](output/2019_County_Health_Texas_Data_Kip.xlsx) and in a [Jupyter notebook](output/Urban_Rural_Health_Texas.ipynb) A preliminary analysis was done in the Excel Workbook to examine correlations to help decide what factors to analyze in Pandas.
+Excel files will be merged in both an [Excel Workbook](output/2019_County_Health_Texas_Data_Kip.xlsx) and in a [Jupyter notebook](output/Urban_Rural_Health_Texas.ipynb) A preliminary analysis was done in the Excel Workbook to examine correlations to help decide what factors to analyze in Pandas.
 ![4D Excel Scatter](Images/4DScatter.jpg)
 
 ## Merging Datasets: 
